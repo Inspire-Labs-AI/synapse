@@ -103,3 +103,4 @@ AI-Labs-Operating-Manual*.html
 # Rendered marketing collateral — regenerable from the *.html sources; keep the
 # heavy PNG/PDF output out of the repo.
 /carousel/
+project-synapse-carousel.html
