@@ -1,0 +1,10 @@
+{
+  "name": "synapse-tsparser",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "TypeScript/JavaScript AST extractor for Project Synapse. Invoked by the Go ingestion engine: reads a JSON batch of {relPath, source} from stdin and writes structured {imports, exports, endpoints} JSON to stdout.",
+  "dependencies": {
+    "typescript": "^5.7.0"
+  }
+}
