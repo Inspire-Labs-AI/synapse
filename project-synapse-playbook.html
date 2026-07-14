@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Synapse · The Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Inspirelabs brand system */
+  --ink:#0E0F0A;        /* base ink, primary text, dark surfaces */
+  --paper:#FFFFFF;      /* pure white */
+  --warm:#FAF7F1;       /* warm tint, premium/callout panels */
+  --orange:#FF7A45;     /* ACTIVE ORANGE, active/CTA ONLY, never decorative */
+  --grey:#6F7583;       /* soft grey, secondary text */
+  /* functional UI extensions (kept minimal, brand-true) */
+  --line:#E7E3DA; --line2:#D8D3C8;
+  --warm2:#F4EFE6;
+  --ink70:#3A3B36; --ink50:#6F7583;
+  --ok:#3F7D5B; --okbg:#EAF3EE;
+  --warnc:#9A6B12; --warnbg:#FBF2DC;
+  --badc:#A33A2B; --badbg:#FBEBE7;
+  --disp:'Hanken Grotesk',sans-serif; --body:'Hanken Grotesk',sans-serif; --mono:'JetBrains Mono',monospace;
+  --maxw:920px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper); color:var(--ink); font-family:var(--body);
+  font-size:16.5px; line-height:1.62; -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+
+/* ── MAIN ── */
+main{min-width:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+.sec{padding:56px 0 8px;scroll-margin-top:14px}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);font-weight:600;margin-bottom:10px}
+.sec h2{font-family:var(--disp);font-size:32px;font-weight:800;letter-spacing:-.7px;line-height:1.08;color:var(--ink);margin-bottom:4px}
+.sec h3{font-size:18px;font-weight:700;margin:28px 0 6px;color:var(--ink);letter-spacing:-.2px}
+.sec h4{font-size:14px;font-weight:700;margin:18px 0 4px;color:var(--ink)}
+.sec p{color:var(--ink70);margin:11px 0}
+.sec p strong, li strong{color:var(--ink);font-weight:700}
+.lead{font-size:19px;line-height:1.55;color:var(--ink);font-weight:500}
+ul,ol{margin:11px 0 11px 2px;padding-left:22px;color:var(--ink70)}
+li{margin:6px 0}
+code{font-family:var(--mono);font-size:13px;background:var(--ink);color:var(--warm);padding:2px 7px;border-radius:5px}
+.em{color:var(--orange);font-weight:700}
+
+/* ── HERO ── */
+.hero{background:var(--ink);color:var(--paper);padding:0;border-radius:0}
+.hero .inner{max-width:var(--maxw);margin:0 auto;padding:64px 40px 60px}
+.hero .logo-w{height:22px;margin-bottom:40px;opacity:.95}
+.hero .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:24px;font-weight:600}
+.hero .wordmark{font-family:var(--disp);font-size:150px;font-weight:900;line-height:.86;letter-spacing:-6px;margin:8px 0 22px;color:#fff}
+.hero .wordmark .o{color:var(--orange)}
+.hero .wordmark .brandmark{display:inline-block;width:.4em;height:.4em;vertical-align:baseline;margin-left:.04em}
+.hero .tagline-hero{font-family:var(--disp);font-size:38px;font-weight:700;line-height:1.12;letter-spacing:-1.4px;color:#fff;max-width:22ch;margin-bottom:24px}
+.hero .tagline-hero .o{color:var(--orange)}
+.hero h1{font-family:var(--disp);font-size:62px;font-weight:900;line-height:.95;letter-spacing:-2.4px;margin-bottom:22px;max-width:15ch}
+.hero h1 .o{color:var(--orange)}
+.hero .sub{font-size:18px;line-height:1.55;color:#C9CBC4;max-width:640px;font-weight:400;margin-bottom:42px}
+.hero .sub b{color:#fff;font-weight:600}
+/* the SYSTEM.md artifact */
+.sysfile{border:1px solid #2C2D26;border-radius:12px;overflow:hidden;background:#141510;max-width:760px;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.sysbar{display:flex;align-items:center;gap:8px;padding:11px 16px;background:#1B1C16;border-bottom:1px solid #2C2D26}
+.sysbar .dot{width:11px;height:11px;border-radius:50%}
+.sysbar .d1{background:#FF5F56}.sysbar .d2{background:#FFBD2E}.sysbar .d3{background:#27C93F}
+.sysbar .fname{font-family:var(--mono);font-size:12px;color:#9DA096;margin-left:8px;letter-spacing:.5px}
+.sysbar .badge{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--orange);border:1px solid #3A3B30;border-radius:20px;padding:3px 10px;letter-spacing:1px}
+.sysbody{padding:24px 26px 26px;font-family:var(--mono);font-size:13px;line-height:1.7;white-space:normal}
+.sysbody>div{margin:0}
+.sysbody .key,.sysbody .val{display:inline}
+.sysbody .fm{color:#6F7567}
+.sysbody .key{color:#C9A24B}
+.sysbody .val{color:#E8E5DC}
+.sysbody .cm{color:#5E6358}
+.sysbody .hr{border:none;border-top:1px solid #26271F;margin:16px 0}
+.sysbody .h{color:#fff;font-weight:600;font-size:13px}
+.sysbody .obj{color:#fff}
+.sysbody .obj .n{font-family:var(--disp);font-size:34px;font-weight:900;color:var(--orange);vertical-align:-6px;letter-spacing:-1px;margin-right:4px}
+.sysbody ul.sys{list-style:none;margin:8px 0 0;padding:0}
+.sysbody ul.sys li{margin:5px 0;color:#C2C4BA;padding-left:18px;position:relative}
+.sysbody ul.sys li::before{content:"–";position:absolute;left:0;color:var(--orange)}
+.sysbody .ok{color:#27C93F}
+.sysbody .val.blk{display:block;color:#C2C4BA;margin:6px 0}
+.sysbody .lawk{color:#C9A24B;font-weight:600}
+.hmeta{display:flex;gap:8px;flex-wrap:wrap;margin-top:28px}
+.hmeta span{font-family:var(--mono);font-size:11px;padding:7px 13px;border:1px solid #2A2B26;border-radius:30px;color:#9DA096}
+
+/* ── PROGRESS BAR ── */
+.progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--orange);z-index:999;transition:width .1s linear}
+
+/* ── CARDS / GRID ── */
+.grid{display:grid;gap:13px;margin:18px 0}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px}
+.card.warm{background:var(--warm);border-color:var(--line2)}
+.card.ink{background:var(--ink);color:var(--paper);border:none}
+.card.ink h4,.card.ink p{color:var(--paper)}.card.ink p{color:#C9CBC4}
+.card.ink p strong,.card.ink strong{color:#fff;font-weight:700}
+.card.ink em{color:#fff;font-style:italic}
+.card h4{font-size:15px;margin-bottom:5px}
+.card p{font-size:14px;margin:4px 0;color:var(--ink70)}
+.stat{text-align:center;padding:22px 12px}
+.stat .v{font-family:var(--disp);font-size:32px;font-weight:800;line-height:1;letter-spacing:-1px}
+.stat .v.o{color:var(--orange)}
+.stat .l{font-family:var(--mono);font-size:11px;color:var(--grey);margin-top:9px;letter-spacing:.3px}
+
+/* ── CALLOUTS ── */
+.call{border-radius:10px;padding:15px 18px;margin:18px 0;border:1px solid;font-size:14.5px}
+.call .t{font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-bottom:7px}
+.call p{margin:4px 0}
+.call.ok{background:var(--okbg);border-color:#BcdCC8}.call.ok .t{color:var(--ok)}
+.call.warn{background:var(--warnbg);border-color:#EBD9A6}.call.warn .t{color:var(--warnc)}
+.call.bad{background:var(--badbg);border-color:#EFCcC4}.call.bad .t{color:var(--badc)}
+.call.cta{background:var(--ink);border-color:var(--ink);color:var(--paper)}.call.cta .t{color:var(--orange)}.call.cta p{color:#D5D7D0}
+.call.cta p strong,.call.cta strong{color:#fff;font-weight:700}.call.cta em{color:#fff}
+
+/* ── TABLE ── */
+.tbl{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.tbl th{background:var(--warm2);text-align:left;padding:11px 13px;font-family:var(--mono);font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--ink70);font-weight:600;border-bottom:1px solid var(--line2)}
+.tbl td{padding:11px 13px;border-bottom:1px solid var(--line);color:var(--ink70);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl td strong{color:var(--ink)}
+.tag{font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:20px;white-space:nowrap;font-weight:500;border:1px solid}
+.t-ship{background:var(--okbg);color:var(--ok);border-color:#BcdCC8}
+.t-build{background:var(--warm2);color:var(--ink70);border-color:var(--line2)}
+.t-prio{background:var(--badbg);color:var(--badc);border-color:#EFCcC4}
+.t-test{background:var(--warnbg);color:var(--warnc);border-color:#EBD9A6}
+
+/* ── FLOW ── */
+.flow{counter-reset:s;margin:18px 0}
+.step{display:grid;grid-template-columns:38px 1fr;gap:15px;padding:15px 0;border-bottom:1px dashed var(--line2)}
+.step:last-child{border:none}
+.step .b{counter-increment:s;width:34px;height:34px;border-radius:9px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--mono);font-weight:600;font-size:14px}
+.step .b::before{content:counter(s)}
+.step h4{margin-bottom:2px}.step p{font-size:14px;margin:3px 0}
+
+/* ── VALUE / PRINCIPLE BLOCKS ── */
+.val{display:grid;grid-template-columns:54px 1fr;gap:16px;padding:20px 0;border-bottom:1px solid var(--line)}
+.val:last-child{border:none}
+.val .nv{font-family:var(--disp);font-size:34px;font-weight:900;color:var(--orange);line-height:1;letter-spacing:-1px}
+.val h3{margin:0 0 4px}
+.val p{margin:4px 0;font-size:14.5px}
+.val .mantra{font-family:var(--mono);font-size:12px;color:var(--grey);margin-top:6px}
+
+.divider{height:1px;background:var(--line);margin:0;border:none}
+
+/* ── PLAYBOOK CARDS ── */
+.pb{border:1px solid var(--line);border-radius:12px;margin:18px 0;overflow:hidden;background:var(--paper)}
+.pb-head{background:var(--ink);color:var(--paper);padding:16px 20px}
+.pb-head .pb-tag{font-family:var(--mono);font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--orange);font-weight:600}
+.pb-head h3{color:var(--paper);margin:5px 0 0;font-size:19px;font-weight:800;letter-spacing:-.3px}
+.pb-head .pb-for{font-family:var(--mono);font-size:11px;color:#9DA096;margin-top:4px}
+.pb-body{padding:18px 20px}
+.pb-body .row{display:grid;grid-template-columns:120px 1fr;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.pb-body .row:last-child{border-bottom:none}
+.pb-body .row .k{font-family:var(--mono);font-size:11px;color:var(--grey);text-transform:uppercase;letter-spacing:.4px;padding-top:2px}
+.pb-body .row .v{color:var(--ink70)}
+.pb-body .row .v strong{color:var(--ink)}
+.pb-steps{counter-reset:ps;margin:4px 0 0;padding:0;list-style:none}
+.pb-steps li{counter-increment:ps;position:relative;padding:4px 0 4px 26px;font-size:14px;color:var(--ink70)}
+.pb-steps li::before{content:counter(ps);position:absolute;left:0;top:3px;width:18px;height:18px;background:var(--warm2);border:1px solid var(--line2);border-radius:5px;font-family:var(--mono);font-size:10px;display:grid;place-items:center;color:var(--ink70)}
+
+/* ── CODE BLOCKS ── */
+.code{background:var(--ink);border-radius:10px;margin:14px 0;overflow:hidden;border:1px solid #23241D}
+.code-bar{background:#16170F;padding:8px 14px;font-family:var(--mono);font-size:11px;color:#8A8F82;border-bottom:1px solid #23241D;display:flex;justify-content:space-between;align-items:center}
+.code-bar .dot3{display:flex;gap:5px}.code-bar .dot3 i{width:9px;height:9px;border-radius:50%;display:block}
+.code pre{margin:0;padding:14px 16px;overflow-x:auto}
+.code pre code{background:none;border:none;padding:0;color:#E4E7DD;font-family:var(--mono);font-size:12.5px;line-height:1.7;display:block}
+.cc{color:#6E7567}.cs{color:#9DD8A8}.ck{color:var(--orange)}.cf{color:#8FD0E8}.cn{color:#E4E7DD}
+.tree{background:var(--warm);border:1px solid var(--line2);border-radius:10px;padding:16px 18px;font-family:var(--mono);font-size:12.5px;color:var(--ink70);line-height:1.7;white-space:pre;overflow-x:auto;margin:14px 0}
+.tree b{color:var(--ink)}.tree .cm{color:var(--grey)}
+.callout-mini{font-family:var(--mono);font-size:11px;color:var(--grey);margin:6px 0 0}
+footer{background:var(--warm);border-top:1px solid var(--line);margin-top:60px}
+footer .inner{max-width:var(--maxw);margin:0 auto;padding:34px 40px;color:var(--grey);font-size:12.5px;font-family:var(--mono);line-height:1.7}
+
+@media(max-width:960px){
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .hero h1{font-size:40px;letter-spacing:-1.6px}
+  .hero .wordmark{font-size:82px;letter-spacing:-3px}
+  .hero .tagline-hero{font-size:26px}
+  .hero .inner{padding-top:48px}
+  .sysbody{font-size:12px;padding:18px 18px 20px}
+  .sysbody .obj{font-size:15px}.sysbody .obj .n{font-size:28px}
+  .wrap,.hero .inner{padding-left:24px;padding-right:24px}
+  .pb-body .row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<main>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="inner">
+    <img src="logo.png" alt="Inspirelabs" style="width:230px;height:auto;display:block;margin-bottom:10px;opacity:.95">
+    <div class="eyebrow">Codebase Intelligence Engine</div>
+    <div class="wordmark">Synapse<svg class="brandmark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="34" fill="none" stroke="#FF7A45" stroke-width="8"/><circle cx="50" cy="50" r="13" fill="#FF7A45"/></svg></div>
+    <div class="tagline-hero">We turn a codebase into a <span class="o">mind</span> you can talk to.</div>
+    <p class="sub">Project Synapse ingests source code, builds its absolute AST dependency graph, and fuses it with a vector semantic layer, then renders the whole thing as a living, neuroscience-inspired map you can explore, question, and build against. <b>This playbook is the system prompt for anyone working with Synapse: read it once, top to bottom, and the engine, the map, and the moves are loaded.</b></p>
+    <div class="sysfile">
+      <div class="sysbar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="fname">SYNAPSE.md</span><span class="badge">GRAPH · LOADING</span></div>
+      <div class="sysbody">
+<div class="fm">---</div>
+<div><span class="key">role</span><span class="val">: an AI codebase-intelligence, topology &amp; blueprinting engine</span></div>
+<div><span class="key">mandate</span><span class="val">: make any codebase legible, answerable &amp; buildable-against</span></div>
+<div><span class="key">substrate</span><span class="val">: a true multi-language AST graph fused with a pgvector semantic layer, rendered on a neural canvas</span></div>
+<div class="fm">---</div>
+<hr class="hr">
+<div class="cm"># OBJECTIVE: the reward signal</div>
+<div class="obj"><span class="n">1</span> graph that fuses structure and meaning.</div>
+<div class="cm">// every surface — graph, chat, blueprint, prune, docs — runs on this one substrate.</div>
+<div class="cm">// structure comes from the real parser (tsc / go-parser), not regex.</div>
+<div class="cm">// meaning comes from code-aware embeddings over the same nodes.</div>
+<div class="cm">// the win isn't "it renders." it's "an unfamiliar repo becomes answerable in an afternoon."</div>
+<hr class="hr">
+<div class="cm"># OPERATING LAWS</div>
+<ul class="sys">
+<li><span class="lawk">structure_first</span>: parse the true AST before inferring anything. the graph is the ground truth every answer stands on.</li>
+<li><span class="lawk">ground_every_claim</span>: the assistant retrieves real chunks and traces the path — it never invents a file or a route.</li>
+<li><span class="lawk">reuse_before_build</span>: the blueprint scores what already exists before proposing a single new file.</li>
+<li><span class="lawk">human_disposes</span>: prune flags dead code as candidates, verified against source — it never deletes.</li>
+<li><span class="lawk">language_native</span>: each language is read by its own real parser, never a lexer pretending to understand it.</li>
+</ul>
+<hr class="hr">
+<div class="val blk"><span class="ok">●</span> graph loaded. the map is live. <span style="color:#fff">now go read a codebase you've never seen.</span></div>
+      </div>
+    </div>
+    <div class="hmeta">
+      <span>Living document</span>
+      <span>Go · Next.js 16 · pgvector</span>
+    </div>
+  </div>
+</section>
+
+<!-- 00 ORIENTATION -->
+<section class="sec wrap" id="orient">
+  <div class="kicker">00 · System Prompt</div>
+  <h2>Load This First</h2>
+  <p class="lead">You're holding the playbook for Project Synapse. Everything you need to understand what it is, how it thinks, what it's made of, and how to drive it, is in this one file. Read it once, top to bottom, and you go from "what is this thing" to "I can point it at a repo and get answers." Not in a week. Today.</p>
+  <p>Synapse is neuroscience-inspired on purpose: a codebase is a nervous system, and the metaphor isn't decoration, it names real features. Read this the way Synapse itself loads context, completely, so nothing downstream is a guess. It runs in five clusters:</p>
+  <div class="grid g3">
+    <div class="card warm"><h4>// The Charter</h4><p><span style="font-family:var(--mono);font-size:10px;color:var(--grey)">§01–02</span><br>What Synapse is and the one job it exists to do: turn code into a substrate you can understand and build against. This is the lens for everything after it.</p></div>
+    <div class="card warm"><h4>// The Neural Model</h4><p><span style="font-family:var(--mono);font-size:10px;color:var(--grey)">§03</span><br>The five cybernetic capabilities, Cortex, Axon, Dendrite, Myelin, Engram, that give the platform its shape and its names.</p></div>
+    <div class="card warm"><h4>// The Substrate</h4><p><span style="font-family:var(--mono);font-size:10px;color:var(--grey)">§04</span><br>The stack and the data model. You can't drive an engine you don't understand, and every surface is just a view onto this one graph.</p></div>
+    <div class="card warm"><h4>// The Surfaces</h4><p><span style="font-family:var(--mono);font-size:10px;color:var(--grey)">§05</span><br>What you actually touch: the galaxy/radial graph, the assistant, the blueprint, prune, docs, architecture, and the guided tour.</p></div>
+    <div class="card warm"><h4>// The Playbooks</h4><p><span style="font-family:var(--mono);font-size:10px;color:var(--grey)">§06–08</span><br>The runbooks, the engines under the hood, and the operating laws that keep every answer grounded and every finding trustworthy.</p></div>
+  </div>
+  <div class="call cta"><div class="t">▲ The one idea, up front</div><p>Synapse never guesses when it can know. Structure is parsed, not inferred. Answers are retrieved and traced, not hallucinated. Reuse is scored before anything new is proposed. Dead code is verified before it's flagged. <strong>Everything in this document is a consequence of that one commitment</strong>, ground-truth first. Hold it, and the rest falls into place.</p></div>
+</section>
+
+<!-- 01 CHARTER -->
+<section class="sec wrap" id="charter">
+  <div class="kicker">01 · System Prompt</div>
+  <h2>The Charter: What Synapse Is</h2>
+  <p class="lead">Synapse is an AI codebase-intelligence, visual-topology, and product-blueprinting engine. Not a linter. Not a docs generator you run once and forget. Not a chatbot bolted onto a repo. It exists to <strong>turn a codebase into a substrate you can reason over</strong>, and that value lands in two equally serious places.</p>
+  <p>The mandate is simple to say and hard to earn: make any codebase <strong>legible, answerable, and buildable-against</strong>. Some of that is comprehension, helping a person hold an unfamiliar system in their head. Some of it is construction, helping them plan the next feature against what already exists. Neither is the "real" work and neither is the leftover. They're two directions of one job.</p>
+  <div class="grid g2">
+    <div class="card"><h4>Mandate 1 · Understand</h4><p>Take a repository nobody on the team has time to read and make it navigable: a visual dependency map, a chat that traces where a route is handled, a guided tour that walks a new engineer through the code dependency-first, and dead-code detection that says which files are safe to question. Comprehension you'd otherwise buy with weeks of ramp-up.</p></div>
+    <div class="card"><h4>Mandate 2 · Build</h4><p>Take a feature idea and score it against the real codebase: what already exists to reuse, what to extend, and what to build new, and where it belongs. Synapse answers "should we build this?" and "here's the blueprint" from the actual structure of your code, not a generic template.</p></div>
+  </div>
+  <div class="card"><h4>What winning looks like</h4><p>An engineer opens a repo they've never seen and, within an afternoon, can name its entry points, trace a request, find its dead weight, and draft a grounded plan for the next feature. A map that dazzles in a screenshot but can't answer a real question isn't a milestone, it's a <em>screensaver</em>. Synapse is judged on answers, not aesthetics.</p></div>
+  <div class="call warn"><div class="t">★ The bar is grounding</div><p>The frontier here isn't a prettier graph, it's <strong>trust</strong>. Anyone can render 800 nodes. The hard part is that every claim, every highlighted file, every "reuse this", is backed by the real AST and the real source. Synapse is built to be believed, which is why it verifies before it asserts.</p></div>
+</section>
+
+<!-- 02 CORE LOOP -->
+<section class="sec wrap" id="loop">
+  <div class="kicker">02 · System Prompt</div>
+  <h2>The Core Loop: Ingest → Graph → Understand → Build</h2>
+  <p class="lead">Everything Synapse does is one loop. Source goes in; a fused structural-and-semantic graph comes out; and every surface, the map, the chat, the blueprint, the prune report, is a different question asked of that same graph. Get this loop in your head and the whole system stops being a pile of features and becomes one argument.</p>
+  <div class="flow">
+    <div class="step"><div class="b"></div><div><h4>Ingest</h4><p>A Go worker pool walks a local directory or a shallow-cloned repo, dispatches each file to its real parser by extension, and persists a uniform <code>FileAnalysis</code>: imports, exports, declarations, endpoints. Fast, concurrent, language-native.</p></div></div>
+    <div class="step"><div class="b"></div><div><h4>Resolve &amp; graph</h4><p>Imports are resolved language-aware, TS relative paths and <code>baseUrl</code>, Go package→directory, Rust modules, into a true file→file dependency graph stored as <code>ast_relationships</code>. This is the skeleton.</p></div></div>
+    <div class="step"><div class="b"></div><div><h4>Enrich</h4><p>Structural chunks (functions, classes, methods) are embedded with a code-aware model into <code>vector_chunks</code> with an HNSW index. Now the graph carries meaning as well as shape, the semantic layer.</p></div></div>
+    <div class="step"><div class="b"></div><div><h4>Understand</h4><p>The engineer explores the neural map, asks the assistant a question (hybrid vector + keyword RAG that traces the answer onto the canvas), takes a dependency-ordered tour, or scans for dead code, all reads of the same graph.</p></div></div>
+    <div class="step"><div class="b"></div><div><h4>Build</h4><p>A feature idea is decomposed into intents, each scored green/yellow/red against the codebase, and returned as a validation ("should we build this?") or a roadmap ("what to reuse, extend &amp; create, and where"). The loop closes: understanding becomes a plan.</p></div></div>
+  </div>
+  <div class="grid g4">
+    <div class="card stat"><div class="v o">4</div><div class="l">languages, native parsers</div></div>
+    <div class="card stat"><div class="v">1024-d</div><div class="l">code-aware vectors · HNSW</div></div>
+    <div class="card stat"><div class="v">800+</div><div class="l">nodes, smooth on canvas</div></div>
+    <div class="card stat"><div class="v o">6</div><div class="l">surfaces · one graph</div></div>
+  </div>
+  <div class="call ok"><div class="t">▲ Why one loop matters</div><p>Because every surface reads the <em>same</em> substrate, they agree with each other. The file the assistant cites, the node the map highlights, the reuse the blueprint scores, and the orphan prune flags are all the same graph seen from different angles. There is one source of truth, and it's the graph.</p></div>
+</section>
+
+<!-- 03 NEURAL MODEL -->
+<section class="sec wrap" id="neural">
+  <div class="kicker">03 · The Neural Model</div>
+  <h2>The Neural Model: Five Cybernetic Capabilities</h2>
+  <p class="lead">The neuroscience naming isn't a coat of paint. Each term names a real capability with real behaviour. Learn the five and you know the platform's shape, because every feature ladders up to one of them.</p>
+
+  <h3>Cortex Perspectives <span class="tag t-ship">View layer</span></h3>
+  <p>Persona-adaptive zoom. <strong>Synaptic</strong> is the default deep dive: individual file cards, function anchors, raw structural dependency lines, the engineer's view. <strong>Executive</strong> collapses files into parent folder blocks and macro-components with business-flow edges, for a PM or a lead who wants the shape, not the wiring. One graph, two altitudes.</p>
+
+  <h3>Axon Pathways <span class="tag t-ship">Onboarding</span></h3>
+  <p>A guided, dependency-ordered reading tour. Synapse computes a topological sort of the graph, curates the most instructive files (foundations, entry points, high-fan-in modules), and flies the camera through them step by step, foundations first, with a role, a summary, and the key symbols for each. New-engineer ramp-up as a cinematic walkthrough, playable hands-free.</p>
+
+  <h3>Dendrite Callouts <span class="tag t-build">Pattern layer</span></h3>
+  <p>Contextual pattern identification. As the parser reads code, it can flag complex idioms, closures, higher-order functions, custom decorators, transactional blocks, and decorate the canvas with descriptive markers so a reader sees not just <em>what</em> connects to what, but <em>how</em> the code is written.</p>
+
+  <h3>Myelin Insulation <span class="tag t-ship">Docs layer</span></h3>
+  <p>Human documentation, woven in. The ingestion walker scales to markdown, internal wikis, and <code>/docs</code>. It vectorizes those segments as <code>myelin_doc</code> chunks and overlays human-written context directly onto the automated code graph, so the prose that explains the code lives next to the code.</p>
+
+  <h3>Synaptic Engrams <span class="tag t-test">Portability</span></h3>
+  <p>Offline memory. A serialization layer exports the active graph into a compressed, Git-portable JSON snapshot, so a teammate can load an identical canvas without a live database. The map becomes a file you can commit.</p>
+
+  <div class="call cta"><div class="t">◆ The through-line</div><p>Cortex changes the <em>altitude</em>, Axon changes the <em>path</em>, Dendrite adds the <em>idiom</em>, Myelin adds the <em>prose</em>, and Engram makes it <em>portable</em>. Five lenses, one graph. When a new capability is proposed, the first question is which of these five it extends.</p></div>
+</section>
+
+<!-- 04 SUBSTRATE -->
+<section class="sec wrap" id="substrate">
+  <div class="kicker">04 · The Substrate</div>
+  <h2>The Substrate: Architecture &amp; Data Model</h2>
+  <p class="lead">Every surface is a view; this is the thing they're views of. A local monorepo monolith: a Go engine for concurrent parsing and retrieval, a Next.js 16 canvas for the map and the panels, and PostgreSQL + pgvector holding both the structure and the meaning.</p>
+  <div class="grid g2">
+    <div class="card"><h4>Backend · Go</h4><p>Ultra-fast, concurrent AST processing and ingestion. A worker pool parses, resolves, chunks, and embeds; native <code>pgx</code> pools talk to Postgres; the RAG, blueprint, prune, docs, architecture, and axon engines all read the same store.</p></div>
+    <div class="card"><h4>Frontend · Next.js 16</h4><p>A TypeScript App-Router workspace. The graph is a <strong>d3 force + radial layout rendered on canvas</strong> (not SVG, so 800+ nodes stay smooth), with GSAP for camera motion and streamed panels for chat and blueprint.</p></div>
+    <div class="card"><h4>Store · PostgreSQL + pgvector</h4><p>Three tables carry everything: <code>code_files</code> (the nodes), <code>ast_relationships</code> (the edges), and <code>vector_chunks</code> (the meaning), the last with an HNSW index for fast semantic search. Runs locally via Docker.</p></div>
+    <div class="card"><h4>Intelligence · pluggable</h4><p>Embeddings auto-chain across providers (Jina code vectors, OpenAI, Gemini, local Ollama, deterministic floor); the LLM layer routes per engine. Swap a key in <code>.env</code> and the provider changes with no other edit.</p></div>
+  </div>
+
+  <h3>The one data model to hold in your head</h3>
+  <p>If you remember nothing else about the internals, remember these three tables. Every feature is a query over them:</p>
+  <table class="tbl">
+    <tr><th>Table</th><th>Is the graph's…</th><th>Holds</th></tr>
+    <tr><td><strong>code_files</strong></td><td>nodes</td><td>every ingested file: path, language, root. One row = one node on the canvas.</td></tr>
+    <tr><td><strong>ast_relationships</strong></td><td>edges</td><td><code>imports</code>, <code>exports</code>, <code>endpoint</code>, and intra-file <code>calls</code>, the resolved, directed dependency graph.</td></tr>
+    <tr><td><strong>vector_chunks</strong></td><td>meaning</td><td>function/class-level chunks + their embeddings (HNSW), plus <code>myelin_doc</code> chunks for markdown.</td></tr>
+  </table>
+
+  <h3>The layout</h3>
+  <div class="tree"><b>project-synapse/</b>
+├─ <b>backend/</b>            <span class="cm"># Go: engines, workers, parsers, RAG</span>
+│  ├─ internal/parser/    <span class="cm"># MultiParser: tsc · go/parser · rust lexer · resolve</span>
+│  ├─ internal/ingest/    <span class="cm"># worker pool · enrich · embeddings</span>
+│  ├─ internal/store/     <span class="cm"># pgx: files · relationships · vector_chunks</span>
+│  ├─ internal/rag/       <span class="cm"># hybrid retrieval + streamed answers</span>
+│  ├─ internal/blueprint/ <span class="cm"># validate / roadmap engine</span>
+│  ├─ internal/prune/     <span class="cm"># dead-code + LLM verification</span>
+│  └─ internal/{docs,architecture,axon,bugs}/
+├─ <b>frontend/</b>           <span class="cm"># Next.js 16 workspace + d3 canvas</span>
+│  └─ app/workspace/      <span class="cm"># GraphView · Assistant · Blueprint · Prune</span>
+├─ <b>docker/</b>             <span class="cm"># Postgres + pgvector, schema init</span>
+└─ <b>docs/</b>               <span class="cm"># architecture logs · API registry</span></div>
+
+  <p>And the shape of the contract every parser produces, one structural payload every downstream stage consumes uniformly:</p>
+  <div class="code">
+    <div class="code-bar"><span class="dot3"><i class="d1" style="background:#FF5F56"></i><i class="d2" style="background:#FFBD2E"></i><i class="d3" style="background:#27C93F"></i></span><span>FileAnalysis · the universal contract</span></div>
+    <pre><code><span class="ck">type</span> <span class="cf">FileAnalysis</span> <span class="ck">struct</span> {
+  <span class="cn">RelPath</span>      <span class="cf">string</span>
+  <span class="cn">Language</span>     <span class="cf">string</span>       <span class="cc">// typescript · go · rust · markdown</span>
+  <span class="cn">Imports</span>      []<span class="cf">ImportRef</span>  <span class="cc">// resolved: relative · baseUrl · alias · pkg</span>
+  <span class="cn">Exports</span>      []<span class="cf">Symbol</span>     <span class="cc">// the file's public surface</span>
+  <span class="cn">Declarations</span> []<span class="cf">Decl</span>       <span class="cc">// functions, classes, methods → chunks</span>
+  <span class="cn">Endpoints</span>    []<span class="cf">Route</span>      <span class="cc">// HTTP routes → graph entry points</span>
+}
+<span class="cc">// one contract. every stage — resolve, chunk, graph, RAG,</span>
+<span class="cc">// blueprint, prune, axon — reads it the same way.</span></code></pre>
+  </div>
+</section>
+
+<!-- 05 SURFACES -->
+<section class="sec wrap" id="surfaces">
+  <div class="kicker">05 · The Surfaces</div>
+  <h2>The Surfaces: What You Actually Touch</h2>
+  <p class="lead">Six views onto the one graph. Each answers a different question, but none of them invents; they all read the substrate from §04. Here's what each is for and when to reach for it.</p>
+
+  <h3>The Neural Map <span class="tag t-ship">Galaxy · Radial</span></h3>
+  <p>The centrepiece. A <strong>Galaxy</strong> force-directed cloud clusters files by module and colours them by folder; a <strong>Radial</strong> hierarchy arranges them on a rim with bundled dependency arcs. Hover a node for its imports/importers at a glance; click to pin it and watch its dependencies stream, amber outward (what it imports), cyan inward (what imports it). Search to fly to any file; isolate a module from the legend; double-click to frame a neighbourhood. Rendered on canvas so it stays fluid at scale.</p>
+
+  <h3>The Assistant <span class="tag t-ship">Hybrid RAG</span></h3>
+  <p>Ask the codebase a question in plain language, "where is the /category route handled?", and Synapse runs hybrid retrieval (vector similarity + keyword over files and relationships), streams a grounded answer, and <strong>traces it onto the map</strong>: the relevant files light up, the execution flow fills the dock. Click a node to open its detail drawer, a short AI summary of the file's role plus its imports and importers.</p>
+
+  <h3>The Blueprint <span class="tag t-ship">Validate · Roadmap</span></h3>
+  <p>Pitch a feature; pick a mode. <strong>Validate</strong> returns a decision, a verdict (Build / Build later / Reconsider), the reuse leverage, the product impact, and the effort and risks. <strong>Roadmap</strong> returns the plan, what to reuse, which files to extend, and the new files and folders to create, following your repo's real conventions. Both are grounded in a green/yellow/red scoring of each intent against the actual code.</p>
+
+  <h3>Prune <span class="tag t-test">Dead code</span></h3>
+  <p>Synaptic pruning: a multi-signal dead-code scan over the AST graph, orphan files, dead clusters, unused exports, then an LLM verification pass that reads the real source to separate framework-invoked files from genuine husks. Findings come with a confidence and a concrete, source-grounded reason, and are always <em>candidates for review</em>, never automatic deletions.</p>
+
+  <h3>Docs &amp; Architecture <span class="tag t-build">Synthesis</span></h3>
+  <p>Generated, grounded documentation and an interactive architecture diagram, both written from the real graph and its retrieved code, so the docs describe the system as it actually is (the right state manager, the real data flow), not as a generic template imagines it.</p>
+
+  <div class="call cta"><div class="t">▲ How to pick a surface</div><p>New to the repo? Start on the <strong>map</strong> and take an <strong>Axon tour</strong>. Have a specific question? Ask the <strong>assistant</strong>. Cleaning up? Run <strong>prune</strong>. Planning the next feature? Open the <strong>blueprint</strong>. They're not separate apps, they're four questions asked of the same graph.</p></div>
+</section>
+
+<!-- 06 PLAYBOOKS -->
+<section class="sec wrap" id="playbooks">
+  <div class="kicker">06 · Runbooks</div>
+  <h2>Playbooks: Driving Synapse</h2>
+  <p class="lead">The concrete moves. Each runbook names the job, the surface, the steps, and what "done" looks like. Don't read these as reference, run them, they're the fastest way to internalize how the engine behaves.</p>
+  <div class="call warn"><div class="t">★ Before any of these</div><p>Bring the stack up first: Docker (Postgres + pgvector) must be running, then the Go backend on <code>:8080</code>, then the Next.js workspace. Ingestion is at parse-time, so any change to how code is read only takes effect on the next ingest.</p></div>
+
+  <div class="pb">
+    <div class="pb-head"><div class="pb-tag">Playbook 01 · Onboarding a repo</div><h3>From URL to Living Map</h3><div class="pb-for">Turn a repository you've never seen into a navigable neural graph.</div></div>
+    <div class="pb-body">
+      <div class="row"><div class="k">Job</div><div class="v">Ingest a local directory or a shallow-cloned repo and get a canvas you can explore.</div></div>
+      <div class="row"><div class="k">Steps</div><div class="v"><ol class="pb-steps"><li>Point Synapse at a local path (or clone-on-demand with a personal access token).</li><li>The worker pool walks the tree, parses each file with its native parser, and resolves imports.</li><li>The enrich pass chunks declarations and embeds them into the semantic layer.</li><li>Open the workspace; the graph settles into a Galaxy of module-coloured clusters.</li><li>Switch the repo from the selector; the map, assistant, and blueprint all scope to it.</li></ol></div></div>
+      <div class="row"><div class="k">Done when</div><div class="v">The node/edge count matches the repo, entry points read as reachable, and the assistant can answer a question about it.</div></div>
+    </div>
+  </div>
+
+  <div class="pb">
+    <div class="pb-head"><div class="pb-tag">Playbook 02 · Comprehension</div><h3>Read a Codebase in an Afternoon</h3><div class="pb-for">Hold an unfamiliar system in your head without reading every file.</div></div>
+    <div class="pb-body">
+      <div class="row"><div class="k">Job</div><div class="v">Understand a repo's shape, its entry points, and how a request flows.</div></div>
+      <div class="row"><div class="k">Steps</div><div class="v"><ol class="pb-steps"><li>Take an <strong>Axon tour</strong>, foundations first, camera flying step by step (hit play for hands-free).</li><li>Switch to <strong>Executive</strong> perspective for the macro shape; back to <strong>Synaptic</strong> for the wiring.</li><li>Ask the <strong>assistant</strong> where a specific route or symbol lives; watch it trace onto the map.</li><li>Click any file for its AI summary, imports, and importers; follow the connection chips to hop the dependency chain.</li></ol></div></div>
+      <div class="row"><div class="k">Done when</div><div class="v">You can name the entry points, trace one request end to end, and point to the core modules.</div></div>
+    </div>
+  </div>
+
+  <div class="pb">
+    <div class="pb-head"><div class="pb-tag">Playbook 03 · Planning</div><h3>Validate, Then Blueprint a Feature</h3><div class="pb-for">Decide whether to build something, then get the plan, grounded in your code.</div></div>
+    <div class="pb-body">
+      <div class="row"><div class="k">Job</div><div class="v">Turn a feature idea into a build/no-build call and an implementation plan.</div></div>
+      <div class="row"><div class="k">Steps</div><div class="v"><ol class="pb-steps"><li>Open <strong>Blueprint</strong>, type the feature idea, and choose <strong>Validate</strong>.</li><li>Read the verdict, reuse leverage, product impact, and effort/risks; decide.</li><li>If it's a go, flip to <strong>Roadmap</strong> and re-run for the same idea.</li><li>Follow the plan: reuse the named files, extend the listed ones, create the new files where it says, matching your repo's folder conventions.</li></ol></div></div>
+      <div class="row"><div class="k">Done when</div><div class="v">You have a defensible verdict and a file-level plan that names real paths, reuse before build.</div></div>
+    </div>
+  </div>
+
+  <div class="pb">
+    <div class="pb-head"><div class="pb-tag">Playbook 04 · Cleanup</div><h3>Hunt Dead Code, Safely</h3><div class="pb-for">Find what's genuinely removable, with a reason you can trust.</div></div>
+    <div class="pb-body">
+      <div class="row"><div class="k">Job</div><div class="v">Surface orphan files, unused exports, and commented-out husks, without false positives.</div></div>
+      <div class="row"><div class="k">Steps</div><div class="v"><ol class="pb-steps"><li>Open <strong>Prune</strong>; the structural scan runs over the AST graph (reachability from entry points).</li><li>The LLM verification pass reads each candidate's real source and separates framework-invoked files from genuine dead code.</li><li>Read each finding's confidence and its source-grounded reason ("fully commented out", "exports nothing referenced").</li><li>Treat every finding as a review candidate, Synapse flags; a human decides.</li></ol></div></div>
+      <div class="row"><div class="k">Done when</div><div class="v">You have a short, high-confidence list of removable files, each with a concrete justification.</div></div>
+    </div>
+  </div>
+
+  <div class="call ok"><div class="t">▲ The pattern across all four</div><p>Each runbook is the same move in a different key: point Synapse at real code, let it read the true structure, and hand you a grounded answer, a map, a trace, a plan, a verdict, instead of a guess. That's the whole engine in miniature.</p></div>
+</section>
+
+<!-- 07 UNDER THE HOOD -->
+<section class="sec wrap" id="hood">
+  <div class="kicker">07 · Under the Hood</div>
+  <h2>Under the Hood: The Engines</h2>
+  <p>You don't need this to use Synapse, but knowing how it earns its answers is how you trust them, and how you extend it. Four engines do the real work.</p>
+  <table class="tbl">
+    <tr><th>Engine</th><th>What it does</th><th>Why it's trustworthy</th></tr>
+    <tr><td><strong>MultiParser + resolver</strong></td><td>Dispatches each file to a real parser, TS/JS via a <code>tsc</code> subprocess, Go via <code>go/parser</code>, Rust via a brace-aware scanner, then resolves imports language-aware (relative, <code>baseUrl</code>, tsconfig aliases, Go packages, Rust modules).</td><td>True ASTs, not regex. The <code>baseUrl</code> resolution is why <code>src/…</code> imports actually connect instead of looking external.</td></tr>
+    <tr><td><strong>Embedding chain</strong></td><td>Chunks declarations to a structural boundary and embeds them; auto-selects a provider (code-aware Jina → OpenAI → Gemini → local Ollama → deterministic floor) and auto-migrates the vector column when the dimension changes.</td><td>Code-specialized vectors, and a deterministic fallback means it always runs, even offline.</td></tr>
+    <tr><td><strong>Hybrid RAG</strong></td><td>Blends vector similarity with keyword search over files and relationships, assembles a grounded context window, and streams the answer while emitting the highlighted files and execution flow.</td><td>Retrieval is over real chunks; the answer is traced onto the graph, so you can check it against the map.</td></tr>
+    <tr><td><strong>Prune + verify</strong></td><td>Computes module-level reachability from entry points, classifies orphans / dead clusters / unused exports, then an LLM pass reads each candidate's source to drop framework false positives and confirm husks.</td><td>Two-tier: fast structural signal, then a source-grounded second opinion. Findings carry confidence and a concrete reason.</td></tr>
+  </table>
+  <div class="call warn"><div class="t">◆ The extension rule</div><p>Adding a language, a provider, or a surface? Route it through the existing contracts, the <code>FileAnalysis</code> payload, the three-table store, the embedding chain, before inventing a new path. Stay within the four supported languages and the raw-SQL-over-pgvector approach unless there's a real reason not to. The system's power is that everything reads one graph; a bypass weakens that.</p></div>
+</section>
+
+<!-- 08 OPERATING LAWS -->
+<section class="sec wrap" id="laws">
+  <div class="kicker">08 · Operating Laws</div>
+  <h2>The Weights: What Synapse Optimizes For</h2>
+  <p class="lead">These are the principles behind every design call in the system, the weights that break ties. When a feature is ambiguous, or you're extending Synapse and unsure which way to go, re-read these. They decide it.</p>
+  <div class="val">
+    <div class="nv">01</div>
+    <div><h3>Structure before semantics</h3>
+    <p>Parse the true AST first; infer meaning second. The dependency graph is ground truth, and the semantic layer is a lens over it, never a replacement for it. A beautiful embedding over a wrong graph is confidently wrong.</p>
+    <p class="mantra">→ Test: is this claim backed by a real edge, or a vibe?</p></div>
+  </div>
+  <div class="val">
+    <div class="nv">02</div>
+    <div><h3>Ground every claim</h3>
+    <p>The assistant retrieves real chunks and traces its answer onto the canvas. It never names a file that isn't there or a route that doesn't exist. If it can't ground a claim, it says so rather than inventing one.</p>
+    <p class="mantra">→ Test: can the user click the answer and land on real code?</p></div>
+  </div>
+  <div class="val">
+    <div class="nv">03</div>
+    <div><h3>Reuse before build</h3>
+    <p>The blueprint scores what already exists, green to reuse, yellow to extend, before it ever proposes a red "build new." The most valuable output is often "you already have this," and new files are the last resort, not the first.</p>
+    <p class="mantra">→ Test: did we check what exists before suggesting new code?</p></div>
+  </div>
+  <div class="val">
+    <div class="nv">04</div>
+    <div><h3>Verify before you assert</h3>
+    <p>Prune runs a structural signal, then reads the real source to confirm it. Dead code is flagged with a source-grounded reason and a confidence, never asserted from a filename. A false positive costs trust, and trust is the product.</p>
+    <p class="mantra">→ Test: did we read the code, or just its name?</p></div>
+  </div>
+  <div class="val">
+    <div class="nv">05</div>
+    <div><h3>Human disposes</h3>
+    <p>Synapse proposes; the engineer decides. Nothing destructive runs on its own, prune flags candidates, the blueprint suggests a plan, the assistant recommends. The last, irreversible call is always a person's.</p>
+    <p class="mantra">→ Test: is the destructive action gated behind a human?</p></div>
+  </div>
+  <div class="val">
+    <div class="nv">06</div>
+    <div><h3>Language-native, always</h3>
+    <p>Each language is read by its own real parser. No regex pretending to understand syntax it can't. When a new language arrives, it comes with a true parser and a real resolver, or it doesn't come at all.</p>
+    <p class="mantra">→ Test: would this survive a weird-but-valid file?</p></div>
+  </div>
+  <div class="val">
+    <div class="nv">07</div>
+    <div><h3>One graph, many views</h3>
+    <p>Every surface reads the same substrate, so they agree. A new capability is a new question asked of the graph, not a new source of truth. The moment two features disagree, one of them stopped reading the graph.</p>
+    <p class="mantra">→ Test: does this read the graph, or a copy of it?</p></div>
+  </div>
+  <div class="val">
+    <div class="nv">08</div>
+    <div><h3>Legible over clever</h3>
+    <p>The win is comprehension, so the interface earns its keep by making things clear: constant-size labels that don't overlap, focus that dims the noise, reasons written in plain language. A cleverer visualization that's harder to read is a regression.</p>
+    <p class="mantra">→ Test: did this make the codebase easier to understand?</p></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="inner">
+    project·synapse — the playbook · a living document<br>
+    an AI codebase-intelligence, visual-topology &amp; product-blueprinting engine<br>
+    Go · Next.js 16 · d3 · PostgreSQL + pgvector · neuroscience-inspired by design<br>
+    <span style="color:var(--orange)">structure first · ground every claim · reuse before build · human disposes</span><br><br>
+    An <a href="https://www.inspirelabs.in" style="color:var(--orange)">Inspirelabs</a> open-source project · MIT licensed · © 2026 Inspirelabs
+  </div>
+</footer>
+
+<script>
+// reading progress, framed as the graph loading
+const bar=document.getElementById('progress');
+function updateProgress(){
+  const sc=document.documentElement.scrollTop||document.body.scrollTop;
+  const h=(document.documentElement.scrollHeight-document.documentElement.clientHeight)||1;
+  const p=Math.min(100,Math.max(0,Math.round((sc/h)*100)));
+  bar.style.width=p+'%';
+}
+window.addEventListener('scroll',updateProgress,{passive:true});
+window.addEventListener('resize',updateProgress);
+updateProgress();
+</script>
+</body>
+</html>
