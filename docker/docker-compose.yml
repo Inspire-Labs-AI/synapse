@@ -1,0 +1,33 @@
+## Project Synapse — Local database & vector store
+## PostgreSQL 16 pre-packaged with the pgvector extension.
+## The `version:` top-level key is intentionally omitted — it is obsolete in
+## Docker Compose v2+ and emits a warning on modern engines.
+
+services:
+  synapse-db:
+    image: pgvector/pgvector:pg16
+    container_name: synapse-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: synapse
+      POSTGRES_PASSWORD: synapse
+      POSTGRES_DB: synapse
+      # Deterministic data dir so the init scripts run on first boot only.
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      # Named volume keeps ingested graph data across container restarts.
+      - synapse-db-data:/var/lib/postgresql/data
+      # Anything in /docker-entrypoint-initdb.d runs once, on an empty data dir.
+      - ./init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U synapse -d synapse"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  synapse-db-data:
+    name: synapse-db-data
