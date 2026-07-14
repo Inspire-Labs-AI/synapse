@@ -1,0 +1,17 @@
+# Normalize line endings: store LF in the repo, check out native on each OS.
+* text=auto
+
+# Treat these as binary (never normalize or diff).
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.exe binary
+
+# Generated / lockfiles — collapse in diffs and mark as generated on GitHub.
+package-lock.json linguist-generated=true -diff
+go.sum -diff

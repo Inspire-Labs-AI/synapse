@@ -1,0 +1,71 @@
+# CLAUDE.md - Project Synapse Configuration
+
+## 1. Project Objective & Vision
+Project Synapse is an AI-powered codebase intelligence, visual topology, and product blueprinting engine. It ingests source code, constructs an absolute Abstract Syntax Tree (AST) dependency graph, and marries it with a vector semantic layout to allow developers to visually interact, chat with, and map capability reuse options across their engineering assets using an intuitive, neuroscience-inspired platform architecture.
+
+## 2. Tech Stack & Directory Structure
+- **Environment:** Local Monorepo Monolith
+- **Backend:** Go (Golang) for ultra-fast, concurrent AST processing and ingestion pipelines.
+- **Frontend:** Next.js 16 (App Router) using TypeScript.
+- **Visualization:** React Flow for canvas topologies.
+- **Animations/Transitions:** GSAP (GreenSock) for high-end minimalist interface motion.
+- **Database & Vectors:** PostgreSQL 16 + `pgvector` (HNSW index) + `pg_trgm` running locally via Docker.
+
+### Target Directory Layout
+- `/backend` -> Go modules, workers, ingestion loops, RAG engines, and custom parsers.
+- `/frontend` -> Next.js application, canvas viewports, workspace panels, and GSAP tracking hooks.
+- `/docker` -> Docker-compose configurations for PostgreSQL and vector store initialization.
+- `/docs` -> Compiled architectural logs, system schemas, and API registries.
+
+---
+
+## 3. Strict MVP Constraints (2-Week Guardrails)
+- **AST Parsing Engine (multi-language):** A `MultiParser` (`backend/internal/parser/multi.go`) dispatches per file extension into one structural contract (`FileAnalysis`: imports / exports / declarations / endpoints) that every downstream stage (resolve, chunk, graph, RAG, architecture, axon) consumes uniformly:
+  - **TypeScript / JavaScript** (`.ts`, `.tsx`, `.js`, `.jsx`): a local Node.js compiler-API subprocess (`tools/tsparser/parse.mjs`, true `tsc` AST).
+  - **Go** (`.go`): parsed in-process with the Go stdlib `go/parser` (true AST, zero new deps — see `parser/golang.go`).
+  - **Rust** (`.rs`): a lexical brace-aware item scanner (`parser/rust.go`); heuristic by design, since no Go-native Rust AST exists and tree-sitter would require a C toolchain.
+  - **Python** (`.py`): a lexical, indentation-aware scanner (`parser/python.go`); heuristic by design (same rationale as Rust — a true AST would mean a `python3` subprocess dependency). Masks comments/strings/f-strings, then recovers `import`/`from` edges, top-level `def`/`class` + one level of methods, module constants, `__all__`, decorator idioms, and Flask/FastAPI routes.
+  - Import resolution is language-aware (`parser/resolve.go`, `ResolveIndex`): TS relative paths, Go package-path→directory, Rust `mod`/`crate::`/`super::` modules, Python relative (`.`/`..`) + absolute dotted paths against discovered source roots.
+  - Stay within these languages unless a new one is explicitly requested; do not pull in heavy multi-language frameworks (e.g. a bundled tree-sitter toolchain) without need.
+- **Ingestion Strategy:** Target processing local directory structures or shallow-cloning repositories via a direct personal access token. Skip complex multi-tenant GitHub App OAuth infrastructures.
+- **Vector Infrastructure:** Use raw SQL with `pgvector` in Go middleware. Avoid heavy third-party RAG orchestration frameworks. Keep chunks cleanly isolated to structural code boundaries (functions, classes, methods) limited by a 50-line viewport window.
+
+---
+
+## 4. Coding Standards & Conventions
+- **Go:** Clean idiomatic Go, strict error checks, clear goroutine worker pool isolation, and relational database interactions using native `pgx` driver pools.
+- **Next.js:** Tailored functional components, strict TypeScript type definitions, modern React state/memoization hooks (`useMemo`, `useCallback`), and Tailwind CSS for high-fidelity minimalist UI elements.
+- **GSAP:** Handle camera zooming, panning, and structural overlay states smoothly. Keep animation triggers strictly performance-optimized during canvas interactions to prevent OOM errors on CPU-heavy machines.
+
+---
+
+## 5. Cybernetic Naming Conventions & Synapse Feature Extensions
+
+Maintain absolute adherence to the following domain naming schemas when implementing visualization, adaptive layout controls, and intelligence modules:
+
+### A. Core Feature Mappings
+1. **Cortex Perspectives (Persona-Adaptive UI Layer):**
+   - Toggles the Next.js layout viewport between distinct architectural zoom depths.
+   - `Executive Perspective`: Filters out granular files/functions, displaying only parent folder blocks, macro-components, and business flow edges to serve product managers.
+   - `Synaptic Perspective`: The default deep-dive AST directory graph viewport, revealing individual file cards, function anchors (`ƒ` nodes), and raw structural dependency lines.
+2. **Axon Pathways (Topological Guided Learning Tours):**
+   - Chronological, dependency-sorted code walkthrough configurations generated by computing a topological sort of the relational AST graph data.
+   - Tracks automated onboarding sequences, taking a new developer step-by-step through execution paths via fluid camera-fly hooks.
+3. **Dendrite Callouts (Contextual Language Pattern Identification):**
+   - Decorates the code canvas with descriptive markers when the Node.js compiler subprocess flags complex programming idioms (e.g., closures, higher-order functions, custom decorators, or transactional isolation blocks).
+4. **Myelin Insulation (Markdown Wiki & Human Documentation Synthesis):**
+   - The ingestion walker scales to parse native markdown repositories, internal wikis, or `/docs` directories.
+   - It vectorizes these markdown segments into `vector_chunks` (type: `myelin_doc`) and overlays human-written contextual explanations directly onto the automated code graph layout.
+5. **Synaptic Engrams (Portable Local Offline Snapshot Framework):**
+   - A serialization layout module that exports the active Postgres graph structure into a compressed, Git-portable static JSON file snapshot, allowing teammates to load identical UI canvases without hitting a live database instance.
+
+### B. Structural Implementation Rules
+- **Schema Alterations:** Expand existing `ast_relationships` metadata or use isolated JSONB payloads to store Dendrite patterns or Myelin text structures safely without corrupting core code records.
+- **Interface Dynamics:** Rely on your unified Next.js `lib/api.ts` definitions and Go model contracts before rendering views. Ensure GSAP camera interpolations are attached to specific `Axon Pathway` index changes.
+
+---
+
+## 6. Automation & Verification Workflows
+- Always verify Go backend mutations using `go build ./...` or local target integration tests before committing.
+- Always verify Next.js frontend edits using strict client-side typechecks (`npx tsc --noEmit`) and mock validation states.
+- Run `npm run dev` using the `--webpack` flag on local environments to prevent process memory leakage during Tailwind/PostCSS parsing.

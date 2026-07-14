@@ -1,0 +1,105 @@
+# ============================================================================
+# Project Synapse — root .gitignore
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# Secrets & local environment — NEVER commit real API keys / credentials.
+# The committed templates (.env.example) document the variables with empty
+# values; copy them to .env / .env.local locally.
+# ----------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+
+# ----------------------------------------------------------------------------
+# Go (backend) — compiled binaries & test artifacts
+# ----------------------------------------------------------------------------
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+backend/server
+backend/synapse-verify
+/server
+go.work
+go.work.sum
+# Go build/test cache (only if ever placed in-tree)
+**/__debug_bin*
+
+# ----------------------------------------------------------------------------
+# Node / Next.js (frontend) + TS parser sub-process
+# ----------------------------------------------------------------------------
+node_modules/
+.next/
+out/
+build/
+dist/
+.turbo/
+.vercel/
+*.tsbuildinfo
+next-env.d.ts
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.eslintcache
+
+# ----------------------------------------------------------------------------
+# Runtime data / ingestion artifacts
+# ----------------------------------------------------------------------------
+.synapse-clones/
+**/.synapse-clones/
+*.log
+
+# Local Postgres / Docker volumes (if bind-mounted into the repo)
+docker/pgdata/
+pgdata/
+*.dump
+
+# ----------------------------------------------------------------------------
+# Editors / IDEs
+# ----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ----------------------------------------------------------------------------
+# OS cruft
+# ----------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ----------------------------------------------------------------------------
+# Misc / temp / test output
+# ----------------------------------------------------------------------------
+*.tmp
+.cache/
+coverage/
+playwright-report/
+test-results/
+
+# ----------------------------------------------------------------------------
+# Internal / non-public reference material — NEVER publish.
+# (This is internal company material dropped in locally for reference; it is
+#  not part of the open-source project.)
+# ----------------------------------------------------------------------------
+AI-Labs-Operating-Manual*.html
+
+# Generated project-context exports (may contain a private analysed codebase).
+*-context-*.json
+*.agent-context.json
+
+# Rendered marketing collateral — regenerable from the *.html sources; keep the
+# heavy PNG/PDF output out of the repo.
+/carousel/
