@@ -1,0 +1,67 @@
+name: 🐛 Bug report
+description: Report something that isn't working as expected
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to file a bug! Please fill in the details below.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug, and what you expected instead.
+      placeholder: When I ingest a repo with X, the graph shows Y, but I expected Z.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: The smallest set of steps that reproduces the problem.
+      placeholder: |
+        1. Run `make db-up`
+        2. Ingest '...'
+        3. Open the workspace and '...'
+        4. See the error
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part?
+      options:
+        - Ingestion / parser
+        - Graph / canvas
+        - Assistant (RAG chat)
+        - Blueprint (validate / roadmap)
+        - Prune (dead code)
+        - Bug scan
+        - Docs / Architecture
+        - Tour
+        - Setup / build / other
+    validations:
+      required: true
+  - type: input
+    id: language
+    attributes:
+      label: Repo language(s)
+      description: What language(s) was the ingested codebase? (TypeScript, JavaScript, Go, Rust)
+      placeholder: TypeScript
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: OS, Go version (`go version`), Node version (`node -v`), and the embedding/LLM provider (or "offline / no keys").
+      placeholder: |
+        OS: Windows 11
+        Go: 1.26
+        Node: 20.x
+        Provider: offline (no keys)
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Backend logs or browser console errors (redact any secrets).
+      render: shell

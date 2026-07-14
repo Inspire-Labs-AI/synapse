@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Questions & discussion
+    url: https://github.com/piyush-inspire/project-synapse/discussions
+    about: Ask questions, share ideas, and discuss usage here (update this URL to your repo).
